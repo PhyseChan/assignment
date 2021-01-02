@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">assignment</string>
+
+    <!-- 权限相关 -->
+    <string name="go_setting">去设置</string>
+    <string name="base_permission_message">在设置-应用-HomeWork-权限中开启存储和设备信息权限，以正常使用我的框架</string>
+    <string name="permission_camera_title">相机未开启</string>
+    <string name="permission_camera_message">请在系统设置中开启相机权限</string>
+    <string name="permission_storage_title">手机存储未开启</string>
+    <string name="permission_storage_message">请在系统设置中开启手机存储权限</string>
+    <string name="user_info_album_title">“HomeWork”想访问您的相册</string>
+    <string name="scan_qrcode_camera_content">允许“HomeWork”访问相机，以便您使用“扫一扫”的二维码扫描功能</string>
+    <string name="scan_qrcode_album_content">允许“HomeWork”访问您的相册，以便于您选择图片用于图片二维码识别功能</string>
+    <string name="update_info_title">“HomeWork”想访问您的相机</string>
+    <string name="title_activity_show_image">ShowImageActivity</string>
+    <!--
+    This string is used for square devices and overridden by hello_world in
+    values-round/strings.xml for round devices.
+    -->
+    <string name="hello_world">Hello Square World!</string>
+    <string name="title_activity_maps">Com6510 Map page</string>
+    <string name="title_activity_main2">MainActivity</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="title_activity_base2">Base2</string>
+</resources>
