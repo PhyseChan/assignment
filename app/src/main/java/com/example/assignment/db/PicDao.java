@@ -14,7 +14,13 @@ import com.example.assignment.PicBean;
 import java.util.List;
 
 
-
+/**
+ * @Author: Qibin Liang, YINGYUE WU
+ * @Time: 2020-12-30
+ * @version: 2.0
+ * @ClassName: PicDao
+ * @Description: This PicDao was created by YINGYUE WU. More database operation functions were appended by Qibin Liang
+ * **/
 @Dao
 public interface PicDao {
     /* User */
@@ -34,11 +40,20 @@ public interface PicDao {
     int updateUser(PicBean picBean);
     /**
      * @Author: Qibin Liang
-     * search the photo by id
+     * @methodName: getcolorbyid
+     * @param Id
+     * @return PicBean
+     * @Description: select the data by id
      * **/
     @Query("Select * from Pic where Id > :Id")
     PicBean getcolorbyid(int Id);
 
+    /**
+     * @Author: Qibin Liang
+     * @methodName: getallPics
+     * @return List<PicBean>
+     * @Description: select all pictures
+     * **/
     @Query("SELECT * FROM Pic")
     List<PicBean> getallPics();
 }

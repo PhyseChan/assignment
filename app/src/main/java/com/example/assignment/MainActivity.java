@@ -6,16 +6,17 @@ package com.example.assignment;
  *  a. Implementation of picture taking and photo uploading (1.1.1)
  * b. Room database implementation (1.1.3)
  * c. MVVM and live data framework implementation
- *
- */
+ **/
+
+/**
+ *  member2: Qibin Liang
+ *  a. Implementing the visit tracker (background process) and sensor tracking including the interface (1.1.2)
+ * **/
 
 import android.Manifest;
-import android.app.ActivityManager;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -34,6 +35,7 @@ import com.example.assignment.base.adapter.OnItemClickListener;
 import com.example.assignment.camera.TakePhoto;
 import com.example.assignment.camera.TakePhotoImp;
 import com.example.assignment.databinding.ActivityMainBinding;
+import com.example.assignment.utils.LocationUtil;
 import com.example.assignment.viewModel.PicViewModel;
 import com.example.assignment.weiget.CommonRefusedDialog;
 
@@ -178,7 +180,9 @@ public class MainActivity extends BaseActivity<PicViewModel, ActivityMainBinding
 
     @Override
     public void takeSuccess(String result) {
-        viewModel.addData(new PicBean(result, ""));
+        PicBean picBean = new PicBean(result, "");
+        picBean = new LocationUtil().setlocation(picBean, MainActivity.this);
+        viewModel.addData(picBean);
     }
 
     @Override
@@ -211,19 +215,24 @@ public class MainActivity extends BaseActivity<PicViewModel, ActivityMainBinding
     }
 
     /**
-     * @Author: Qibib Liang
-     *
-     * create a map button in menu.
+     * @Author: Qibin Liang
+     * @methodName: onCreateOptionsMenu
+     * @param menu Menu
+     * @return boolean
+     * @Description: create a options menu. This options menu is the map button that shows on the right-top of the app.
      * **/
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.mian_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
+
     /**
-     * @Author: Qibib Liang
-     *
-     * select a the item in the menu
+     * @Author: Qibin Liang
+     * @methodName: onOptionsItemSelected
+     * @param item MenuItem
+     * @return boolean
+     * @Description: OptionsItem selection
      * **/
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -231,10 +240,12 @@ public class MainActivity extends BaseActivity<PicViewModel, ActivityMainBinding
         startActivity(intent);
         return true;
     }
+
     /**
      * @Author: Qibin Liang
-     *
-     * get location premission
+     * @methodName: checkLocationReadWritePermission
+     * @return void
+     * @Description: check whether the Activity has the permission of getting location
      * **/
     private void checkLocationReadWritePermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

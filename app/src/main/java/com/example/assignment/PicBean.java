@@ -22,9 +22,31 @@ public class PicBean {
     @ColumnInfo(name = "des")
     private String des;
 
+    @ColumnInfo(name = "Latitude")
+    private double Latitude;
+
+    @ColumnInfo(name = "Longitude")
+    private double Longitude;
+
     public PicBean(String url, String des) {
         this.url = url;
         this.des = des;
+    }
+
+    public double getLatitude() {
+        return Latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        Latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return Longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        Longitude = longitude;
     }
 
     public String getUrl() {

@@ -40,5 +40,9 @@ public class PicViewModel extends BaseViewModel {
 
     }
 
+    public List<PicBean> requestDataNotlive() {
+//        showDialog.setValue(true, "loading");
+        return PicDataBase.getDatabase(AppContext.getInstance()).getUserDao().getallPics();
 
+    }
 }

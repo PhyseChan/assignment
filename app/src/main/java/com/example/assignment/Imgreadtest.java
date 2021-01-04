@@ -1,21 +1,27 @@
 package com.example.assignment;
 
+import android.Manifest;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.location.Location;
+import android.location.LocationManager;
 import android.media.ExifInterface;
 import android.net.Uri;
 import android.os.Bundle;
 
 import com.example.assignment.db.PicDao;
 import com.example.assignment.db.PicDataBase;
+import com.example.assignment.utils.LocationUtil;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.LiveData;
 import androidx.room.Room;
 
@@ -34,13 +40,14 @@ public class Imgreadtest extends AppCompatActivity {
     ImageView img_v;
     PicDataBase picDataBase;
     PicDao picDao;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         databaseinit();
         setContentView(R.layout.activity_main2);
         Toolbar toolbar = findViewById(R.id.toolbar);
-        img_v = (ImageView)findViewById(R.id.readimagandshow);
+        img_v = (ImageView) findViewById(R.id.readimagandshow);
         setSupportActionBar(toolbar);
 
         Button fab = findViewById(R.id.testreadimgbtn);
@@ -50,18 +57,10 @@ public class Imgreadtest extends AppCompatActivity {
                 ExifInterface exif;
                 String tag_gps_latitude = "";
                 String tag_gps_Longitude = "";
-                System.out.println("click button to print pic");
                 List<PicBean> livedatalist = picDao.getallPics();
-                for (PicBean pic:livedatalist) {
-                    try {
-                        exif = new ExifInterface(pic.getUrl());
-                        tag_gps_latitude = exif.getAttribute(ExifInterface.TAG_GPS_ALTITUDE);
-                        tag_gps_Longitude = exif.getAttribute(ExifInterface.TAG_GPS_LONGITUDE);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                for (PicBean pic : livedatalist) {
                     System.out.println(pic.toString());
-                    System.out.println("latitude:"+tag_gps_latitude+" longitude:"+tag_gps_Longitude);
+                    System.out.println("latitude:"+pic.getLatitude()+" longitude:"+pic.getLongitude());
                 }
                 System.out.println("end click button to print pic");
             }
