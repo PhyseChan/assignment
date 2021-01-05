@@ -35,8 +35,10 @@ import com.example.assignment.base.adapter.OnItemClickListener;
 import com.example.assignment.camera.TakePhoto;
 import com.example.assignment.camera.TakePhotoImp;
 import com.example.assignment.databinding.ActivityMainBinding;
+import com.example.assignment.map.UpdateLocationService;
 import com.example.assignment.utils.LocationUtil;
 import com.example.assignment.viewModel.PicViewModel;
+import com.example.assignment.viewModel.TripViewModel;
 import com.example.assignment.weiget.CommonRefusedDialog;
 
 import java.util.List;
@@ -61,7 +63,7 @@ public class MainActivity extends BaseActivity<PicViewModel, ActivityMainBinding
     private PicAdapter adapter;
 
     private TakePhoto mPhoto;
-
+    private Intent serviceIntent;
 
     @Override
     protected PicViewModel initViewModel() {
@@ -77,6 +79,7 @@ public class MainActivity extends BaseActivity<PicViewModel, ActivityMainBinding
     @Override
     protected int onCreate() {
         checkLocationReadWritePermission();
+        serviceIntent = new Intent(this, UpdateLocationService.class);
         return R.layout.activity_main;
     }
 
@@ -178,6 +181,28 @@ public class MainActivity extends BaseActivity<PicViewModel, ActivityMainBinding
         }
     }
 
+    public void beginTrip(View view) {
+        if (checkPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.READ_EXTERNAL_STORAGE})) {
+            TripViewModel tripViewModel = new TripViewModel();
+            tripViewModel.addData(new TripBean("new trip"));
+            serviceIntent.putExtra("tripId",tripViewModel.getLastTrip().getId());
+            startService(serviceIntent);
+            for (TripBean tripBean : tripViewModel.requestAllTrip()){
+                System.out.println(tripBean.toString());
+            }
+
+        } else {
+            requestPermission(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.READ_EXTERNAL_STORAGE}, GET_LOCATION_WRITE_PERMISSION_REQUEST);
+        }
+    }
+
+    public void stopTrip(View view) {
+        if (checkPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.READ_EXTERNAL_STORAGE})) {
+            stopService(serviceIntent);
+        } else {
+            requestPermission(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.READ_EXTERNAL_STORAGE}, GET_LOCATION_WRITE_PERMISSION_REQUEST);
+        }
+    }
     @Override
     public void takeSuccess(String result) {
         PicBean picBean = new PicBean(result, "");
@@ -237,6 +262,8 @@ public class MainActivity extends BaseActivity<PicViewModel, ActivityMainBinding
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent intent = new Intent(this, MapsActivity.class);
+        TripViewModel tripViewModel = new TripViewModel();
+        intent.putExtra("tripId",tripViewModel.getLastTrip().getId());
         startActivity(intent);
         return true;
     }

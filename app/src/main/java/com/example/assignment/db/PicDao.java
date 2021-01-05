@@ -45,8 +45,8 @@ public interface PicDao {
      * @return PicBean
      * @Description: select the data by id
      * **/
-    @Query("Select * from Pic where Id > :Id")
-    PicBean getcolorbyid(int Id);
+    @Query("Select * from Pic where Id = (:Id)")
+    PicBean getPicbyid(int Id);
 
     /**
      * @Author: Qibin Liang
