@@ -263,7 +263,9 @@ public class MainActivity extends BaseActivity<PicViewModel, ActivityMainBinding
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent intent = new Intent(this, MapsActivity.class);
         TripViewModel tripViewModel = new TripViewModel();
-        intent.putExtra("tripId",tripViewModel.getLastTrip().getId());
+        if (tripViewModel.requestAllTrip().size()!=0) {
+            intent.putExtra("tripId", tripViewModel.getLastTrip().getId());
+        }
         startActivity(intent);
         return true;
     }
