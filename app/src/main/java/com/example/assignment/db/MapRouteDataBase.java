@@ -12,6 +12,11 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.assignment.RouteBean;
 
+/**
+ * @Author: Qibin Liang
+ * @methodName: MapRouteDataBase
+ * @Description: this class is used to get the MapRouteDataBase instance
+ * **/
 @Database(entities = {RouteBean.class}, version = 1)
 public abstract class MapRouteDataBase extends RoomDatabase {
     private static volatile MapRouteDataBase INSTANCE;

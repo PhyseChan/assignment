@@ -8,15 +8,14 @@ import com.example.assignment.PicBean;
 import com.example.assignment.RouteBean;
 
 import java.util.List;
-
+/**
+ * @Author: Qibin Liang
+ * @methodName: MapRouteDao
+ * @Description: MapRoute Dao
+ * **/
 @Dao
 public interface MapRouteDao {
-    /**
-     * @Author: Qibin Liang
-     * @methodName: getallPics
-     * @return List<PicBean>
-     * @Description: select all pictures
-     * **/
+
     @Query("SELECT * FROM RouteBean where id = (:id) ")
     List<RouteBean> getroutes(int id);
 

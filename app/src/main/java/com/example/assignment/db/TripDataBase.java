@@ -11,6 +11,11 @@ import androidx.sqlite.db.SupportSQLiteDatabase;
 
 import com.example.assignment.TripBean;
 
+/**
+ * @Author: Qibin Liang
+ * @methodName: TripDataBase
+ * @Description: this class is used to get the TripDataBase instance
+ * **/
 @Database(entities = {TripBean.class}, version = 1)
 public abstract class TripDataBase extends RoomDatabase {
     private static volatile TripDataBase INSTANCE;

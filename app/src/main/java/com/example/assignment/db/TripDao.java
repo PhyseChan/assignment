@@ -10,6 +10,11 @@ import com.example.assignment.TripBean;
 
 import java.util.List;
 
+/**
+ * @Author: Qibin Liang
+ * @methodName: TripDao
+ * @Description: Trip Dao
+ * **/
 @Dao
 public interface TripDao {
 
