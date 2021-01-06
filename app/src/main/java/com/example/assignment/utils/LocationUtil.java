@@ -8,6 +8,7 @@ import android.location.LocationManager;
 import android.media.ExifInterface;
 
 import androidx.core.app.ActivityCompat;
+
 import com.example.assignment.PicBean;
 
 import java.io.IOException;
@@ -31,7 +32,7 @@ public class LocationUtil {
      * @return PicBean a PicBean contains location data.
      * @Description: bind the location to the picture taken in the moment and return it.
      * **/
-    public PicBean setlocation(PicBean pic,Context context){
+    public PicBean setlocation(PicBean pic, Context context) {
         try {
             exif = new ExifInterface(pic.getUrl());
             tag_gps_Latitude = exif.getAttribute(ExifInterface.TAG_GPS_ALTITUDE);
@@ -61,9 +62,25 @@ public class LocationUtil {
      * @return LocationManager return the LocationManager so tha location data can be obtained from it.
      * @Description: get the current location
      * **/
-    public static LocationManager getlocationmanager(Context context){
+    public static LocationManager getlocationmanager(Context context) {
         String serviceName = Context.LOCATION_SERVICE;
-        LocationManager locationManager = (LocationManager)context.getSystemService(serviceName);
+        LocationManager locationManager = (LocationManager) context.getSystemService(serviceName);
         return locationManager;
+    }
+
+    public Location getCurrentLocation(Context context) {
+
+        if (ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return null;
+        }
+        Location location = getlocationmanager(context).getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        return location;
     }
 }

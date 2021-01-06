@@ -16,38 +16,69 @@
         android:layout_marginTop="20dp"
         android:orientation="vertical"
         tools:context=".MainActivity">
-
         <LinearLayout
-            android:id="@+id/ll_buttom"
+            android:id="@+id/ll_warp_buttom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_marginTop="10dp"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/btn_camera"
-                android:layout_width="0dp"
+            android:orientation="vertical">
+            <LinearLayout
+                android:id="@+id/ll_buttom_top"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:onClick="@{model.pickByCapture}"
-                android:text="Capture" />
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/btn_gallery"
-                android:layout_width="0dp"
-                android:layout_marginLeft="20dp"
-                android:onClick="@{model.pickByGallery}"
+                <Button
+                    android:id="@+id/begin_trip_btn"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="@{model.beginTrip}"
+                    android:text="BeginTrip" />
+
+                <Button
+                    android:id="@+id/stop_trip_btn"
+                    android:layout_width="0dp"
+                    android:layout_marginLeft="20dp"
+                    android:onClick="@{model.stopTrip}"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="StopTrip" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_buttom"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Gallery" />
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_camera"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:onClick="@{model.pickByCapture}"
+                    android:text="Capture" />
+
+                <Button
+                    android:id="@+id/btn_gallery"
+                    android:layout_width="0dp"
+                    android:layout_marginLeft="20dp"
+                    android:onClick="@{model.pickByGallery}"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Gallery" />
+            </LinearLayout>
         </LinearLayout>
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_pic"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/ll_buttom" />
+            android:layout_above="@+id/ll_warp_buttom" />
 
     </RelativeLayout>
 </layout>

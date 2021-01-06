@@ -64,6 +64,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".ShowImageActivity" />
+        <service android:name=".map.UpdateLocationService"
+            android:label="updateMapLocation"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="android.intent.action.RESPOND_VIA_MESSAGE"></action>
+            </intent-filter>
+        </service>
     </application>
 
 </manifest>
