@@ -5,6 +5,12 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+/**
+ * @Author: Qibin Liang
+ * @Time: 2020-1-4
+ * @version: 1.0
+ * @ClassName: TripBean
+ * **/
 @Entity(tableName = "TripBean")
 public class TripBean {
     @NonNull

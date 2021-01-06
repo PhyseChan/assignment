@@ -17,9 +17,15 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 
 import com.example.assignment.RouteBean;
-import com.example.assignment.viewModel.PicViewModel;
 import com.example.assignment.viewModel.RouteViewModel;
 
+/**
+ * @Author: Qibin Liang
+ * @Time: 2020-1-4
+ * @version: 1.0
+ * @ClassName: UpdateLocationService
+ * @Description: this service will address the location of user.
+ **/
 public class UpdateLocationService extends Service {
     private LocationManager mLocationManager;
     private int tripid;
@@ -38,7 +44,6 @@ public class UpdateLocationService extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
-        System.out.println("service created");
         mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
@@ -51,6 +56,7 @@ public class UpdateLocationService extends Service {
             return;
         }
         Location location = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        //update the location every 2 seconds or 50 meters.
         mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 2000, 50, new LocationListener() {
             @Override
             public void onStatusChanged(String provider, int status, Bundle extras) {
@@ -64,6 +70,7 @@ public class UpdateLocationService extends Service {
 
             @Override
             public void onLocationChanged(@NonNull Location location) {
+                // if user's location is changed, it will record the current location.
                 RouteBean routeBean = new RouteBean();
                 routeBean.setId(tripid);
                 routeBean.setLatitude(location.getLatitude());

@@ -100,12 +100,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // set the information window
         mMap.setInfoWindowAdapter(new MapPicInfoAdapter(this));
 
-        //draw route
+        //get the list storing location data for current trip.
         List<RouteBean> routelist = new RouteViewModel().requestDataNotlive(tripId);
         ArrayList<LatLng> latLngArrayList = new ArrayList<>();
         for (RouteBean routeBean:routelist){
             latLngArrayList.add(new LatLng(routeBean.getLatitude(),routeBean.getLongitude()));
         }
+        //draw route
         Polyline polyline = googleMap.addPolyline(new PolylineOptions().addAll(latLngArrayList));
         polyline.setColor(Color.BLUE);
     }

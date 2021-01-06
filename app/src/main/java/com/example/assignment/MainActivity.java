@@ -181,6 +181,14 @@ public class MainActivity extends BaseActivity<PicViewModel, ActivityMainBinding
         }
     }
 
+    /**
+     * @Author: Qibin Liang
+     * @methodName: beginTrip
+     * @param view View
+     * @return void
+     * @Description: start a new trip and insert a piece of new trip data into the database,
+     * it will also start the UpdateLocationService and begin to record the location of user.
+     * **/
     public void beginTrip(View view) {
         if (checkPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.READ_EXTERNAL_STORAGE})) {
             TripViewModel tripViewModel = new TripViewModel();
@@ -196,6 +204,13 @@ public class MainActivity extends BaseActivity<PicViewModel, ActivityMainBinding
         }
     }
 
+    /**
+     * @Author: Qibin Liang
+     * @methodName: stopTrip
+     * @param view View
+     * @return void
+     * @Description: stop the trip. it will stop the UpdateLocationService as well as stop the route recording.
+     * **/
     public void stopTrip(View view) {
         if (checkPermissions(new String[]{Manifest.permission.ACCESS_FINE_LOCATION,Manifest.permission.READ_EXTERNAL_STORAGE})) {
             stopService(serviceIntent);
